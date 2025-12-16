@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#667eea">
+    <meta name="description" content="25 dakikalık Pomodoro iş tekniği sayacı">
+    <link rel="manifest" href="./manifest.json">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><text x='50%' y='50%' font-size='100' fill='%23667eea' text-anchor='middle' dominant-baseline='middle'>🍅</text></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%23667eea' width='192' height='192'/><text x='50%' y='50%' font-size='100' fill='white' text-anchor='middle' dominant-baseline='middle'>🍅</text></svg>">
+    <title>Pomodoro Sayacı</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+        
+        .timer-display {
+            font-size: 72px;
+            font-weight: bold;
+            color: #667eea;
+            margin: 30px 0;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 10px;
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        
+        button {
+            padding: 12px 30px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        #startBtn {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        #startBtn:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+        
+        #stopBtn {
+            background-color: #ff6b6b;
+            color: white;
+        }
+        
+        #stopBtn:hover {
+            background-color: #ee5a52;
+            transform: scale(1.05);
+        }
+        
+        #resetBtn {
+            background-color: #2196F3;
+            color: white;
+        }
+        
+        #resetBtn:hover {
+            background-color: #0b7dda;
+            transform: scale(1.05);
+        }
+        
+        button:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🍅 Pomodoro Sayacı</h1>
+        <div class="timer-display" id="timerDisplay">25:00</div>
+        <div class="buttons">
+            <button id="startBtn">Başlat ▶</button>
+            <button id="stopBtn">Duraklat ⏸</button>
+            <button id="resetBtn">Sıfırla ↻</button>
+        </div>
+    </div>
+
+    <script type="module">
+        import init, { PomodoroTimer } from './pomodoro.js';
+
+        let timer = null;
+        let intervalId = null;
+
+        async function run() {
+            try {
+                await init();
+                console.log('✅ WASM modülü yüklendi');
+                timer = new PomodoroTimer();
+                console.log('✅ PomodoroTimer oluşturuldu');
+                updateDisplay();
+
+                document.getElementById('startBtn').addEventListener('click', () => {
+                    console.log('Başlat butonuna tıklandı, timer.is_running():', timer.is_running());
+                    if (!timer.is_running()) {
+                        timer.start();
+                        console.log('✅ Timer başlatıldı');
+                        startInterval();
+                        document.getElementById('startBtn').textContent = 'Çalışıyor ▶';
+                    }
+                });
+
+                document.getElementById('stopBtn').addEventListener('click', () => {
+                    timer.stop();
+                    if (intervalId) {
+                        clearInterval(intervalId);
+                        intervalId = null;
+                    }
+                    document.getElementById('startBtn').textContent = 'Başlat ▶';
+                });
+
+                document.getElementById('resetBtn').addEventListener('click', () => {
+                    timer.stop();
+                    if (intervalId) {
+                        clearInterval(intervalId);
+                        intervalId = null;
+                    }
+                    timer.reset();
+                    updateDisplay();
+                    document.getElementById('startBtn').textContent = 'Başlat ▶';
+                });
+            } catch (error) {
+                console.error('❌ Hata oluştu:', error);
+            }
+        }
+
+        function startInterval() {
+            if (!intervalId) {
+                intervalId = setInterval(() => {
+                    if (timer.is_running()) {
+                        timer.decrement();
+                        updateDisplay();
+
+                        if (timer.get_time() === 0) {
+                            clearInterval(intervalId);
+                            intervalId = null;
+                            timer.stop();
+                            alert('Pomodoro tamamlandı! 🎉');
+                            document.getElementById('startBtn').textContent = 'Başlat ▶';
+                        }
+                    }
+                }, 1000);
+            }
+        }
+
+        function updateDisplay() {
+            if (timer) {
+                const time = timer.format_time();
+                document.getElementById('timerDisplay').textContent = time;
+                console.log('📊 Zaman güncellendi:', time);
+            }
+        }
+
+        // Service Worker'ı kaydet
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./service-worker.js')
+                    .then(registration => {
+                        console.log('Service Worker başarıyla kaydedildi:', registration);
+                    })
+                    .catch(error => {
+                        console.log('Service Worker kaydı başarısız:', error);
+                    });
+            });
+        }
+
+        run();
+    </script>
+</body>
+</html>

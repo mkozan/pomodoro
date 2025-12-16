@@ -1,0 +1,14 @@
+C:\Users\musta\OneDrive\Desktop\Rustproject\pomodoro\backend\target\release\deps\serde-4e05a835763b8d3c.d: C:\Users\musta\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\lib.rs C:\Users\musta\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\integer128.rs C:\Users\musta\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\mod.rs C:\Users\musta\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\de.rs C:\Users\musta\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\ser.rs C:\Users\musta\OneDrive\Desktop\Rustproject\pomodoro\backend\target\release\build\serde-61dd1a266867dcef\out/private.rs
+
+C:\Users\musta\OneDrive\Desktop\Rustproject\pomodoro\backend\target\release\deps\libserde-4e05a835763b8d3c.rlib: C:\Users\musta\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\lib.rs C:\Users\musta\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\integer128.rs C:\Users\musta\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\mod.rs C:\Users\musta\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\de.rs C:\Users\musta\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\ser.rs C:\Users\musta\OneDrive\Desktop\Rustproject\pomodoro\backend\target\release\build\serde-61dd1a266867dcef\out/private.rs
+
+C:\Users\musta\OneDrive\Desktop\Rustproject\pomodoro\backend\target\release\deps\libserde-4e05a835763b8d3c.rmeta: C:\Users\musta\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\lib.rs C:\Users\musta\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\integer128.rs C:\Users\musta\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\mod.rs C:\Users\musta\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\de.rs C:\Users\musta\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\ser.rs C:\Users\musta\OneDrive\Desktop\Rustproject\pomodoro\backend\target\release\build\serde-61dd1a266867dcef\out/private.rs
+
+C:\Users\musta\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\lib.rs:
+C:\Users\musta\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\integer128.rs:
+C:\Users\musta\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\mod.rs:
+C:\Users\musta\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\de.rs:
+C:\Users\musta\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\ser.rs:
+C:\Users\musta\OneDrive\Desktop\Rustproject\pomodoro\backend\target\release\build\serde-61dd1a266867dcef\out/private.rs:
+
+# env-dep:OUT_DIR=C:\\Users\\musta\\OneDrive\\Desktop\\Rustproject\\pomodoro\\backend\\target\\release\\build\\serde-61dd1a266867dcef\\out
